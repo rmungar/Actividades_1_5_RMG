@@ -58,7 +58,7 @@ fun Actividad1() {
         }
 
         Button(
-            onClick = {
+            onClick = { //  CAMBIA EL VALOR DEL TEXTO EN FUNCION DEL ESTADO
                 showLoading = !showLoading
                 if (showLoading) textoBoton = "Cancelar"
                 else textoBoton = "Cargar perfil"
@@ -102,12 +102,12 @@ fun Actividad2() {
         }
 
         Button(
-            onClick = {
+            onClick = { //  CAMBIA EL VALOR DEL TEXTO EN FUNCION DEL ESTADO
                 showLoading = !showLoading
                 if (showLoading) textoBoton = "Cancelar"
                 else textoBoton = "Cargar perfil"
             },
-            modifier = if (showLoading) Modifier.padding(top = 30.dp) else Modifier
+            modifier = if (showLoading) Modifier.padding(top = 30.dp) else Modifier // MODIFICA EL PADDING SUPERIOR EN FUNCION DEL ESTADO
         ) {
             Text(text = textoBoton)
         }
@@ -134,23 +134,23 @@ fun Actividad3() {
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(top = 15.dp)
+                .padding(top = 15.dp) // SEPARA LOS BOTONES DE LA BARRA
             ,
             horizontalArrangement = Arrangement.Center
         ) {
             Button(
-                onClick = {
+                onClick = { // AUMENTA EL PROGRESO EN .1F SI ESTE NO ES MAYOR QUE 1
                     if (progress < 1f){
                         progress += .1f
                     }
 
                 },
-                modifier = Modifier.padding(end = 10.dp)
+                modifier = Modifier.padding(end = 10.dp) // SEPARA LOS BOTONES
             ) {
                 Text(text = "Incrementar")
             }
             Button(
-                onClick = {
+                onClick = { // DISMINUYE EL PROGRESO EN .1F SI ESTE NO ES MENOR QUE 0
                     if (progress > 0f){
                         progress -= .1f
                     }
@@ -173,14 +173,14 @@ y que no deje escribir más de un punto decimal...
 fun Actividad4() {
     var myVal by rememberSaveable { mutableStateOf("") }
 
-    Column(
+    Column( // PARA CENTRAR EL OUTLINED TEXT FIELD EN EL CENTRO DE LA PANTALLA
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TextField(
             value = myVal,
-            onValueChange = {
+            onValueChange = { // PRIMERO REEMPLAZA "," POR ".", LUEGO COMPRUEBA LA CANTIDAD DE "." QUE HAY HY SI ES MENOR O IGAL QUE UNO PASA A COMPROBAR SI TODOS LOS CARACTERES ANTES Y DESPUES DEL "." SON NUMEROS
                 it.replace(",",".")
                 if (it.count {it == '.'} <= 1){
                     if (it.substringBefore(".").isDigitsOnly() && it.substringAfter(".").isDigitsOnly()){
@@ -207,7 +207,7 @@ A nivel funcional no permitas que se introduzcan caracteres que invaliden un nú
 @Composable
 fun Actividad5(myVal: String, onValueChange: (String) -> Unit) {
 
-    Column(
+    Column( // PARA CENTRAR EL OUTLINED TEXT FIELD EN EL CENTRO DE LA PANTALLA
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -230,7 +230,7 @@ fun Actividad5(myVal: String, onValueChange: (String) -> Unit) {
 @Composable
 fun Actividad5Elevada(){
     var myVal by rememberSaveable { mutableStateOf("") }
-    Actividad5(myVal) {
+    Actividad5(myVal) { // PRIMERO REEMPLAZA "," POR ".", LUEGO COMPRUEBA LA CANTIDAD DE "." QUE HAY HY SI ES MENOR O IGAL QUE UNO PASA A COMPROBAR SI TODOS LOS CARACTERES ANTES Y DESPUES DEL "." SON NUMEROS
         it.replace(",",".")
         if (it.count { it == '.'} <= 1){
             if (it.substringBefore(".").isDigitsOnly() && it.substringAfter(".").isDigitsOnly()){
